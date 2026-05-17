@@ -20,6 +20,7 @@ interface Props {
 	className?: string;
 	focused: boolean;
 	onFocus: () => void;
+	onClose: () => void;
 }
 
 export default function Window({
@@ -34,6 +35,7 @@ export default function Window({
 	focused,
 	onFocus,
 	children,
+	onClose,
 }: Props) {
 	const [pos, setPos] = useState({ x: x, y: y });
 	const [size, setSize] = useState({ w: width, h: height });
@@ -53,6 +55,7 @@ export default function Window({
 		event.preventDefault();
 
 		setDragging(true);
+		onFocus();
 		dragStart.current = {
 			mx: event.clientX,
 			my: event.clientY,
@@ -125,8 +128,8 @@ export default function Window({
 				onClick={onFocus}
 			>
 				<div className="relative w-full h-8" onMouseDown={onTitleMouseDown}>
-					<ControllWindow x={10} y={10}></ControllWindow>
-					<div className="absolute left-20 top-1.5 text-md font-bold">
+					<ControllWindow x={10} y={10} onClose={onClose}></ControllWindow>
+					<div className="absolute left-20 top-1.5 text-md font-bold cursor-default">
 						<p>{title}</p>
 					</div>
 				</div>
