@@ -1,7 +1,14 @@
 import { WINDOWS } from "@/app/windows";
 import Window from "./Window";
 import Folder from "../Folder";
-import { FolderArchive, FolderIcon, StickyNote } from "lucide-react";
+import {
+	AppWindowMac,
+	Book,
+	Clock,
+	FolderArchive,
+	FolderIcon,
+	StickyNote,
+} from "lucide-react";
 
 const window_props = WINDOWS[0];
 
@@ -27,16 +34,24 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 				<div className="w-full h-full px-2 py-2 flex">
 					<div className="w-[25%] liquid-glass-dark h-[calc(100%-30px)] rounded-2xl">
 						<div className="px-3 py-2 text-sm flex flex-col gap-1">
+							<div className="flex items-center justify-start gap-1 px-1 cursor-pointer">
+								<Clock className="w-5"></Clock>
+								<p className="cursor-pointer">Recents</p>
+							</div>
 							<p className="text-xs text-gray-500 font-bold cursor-default">
 								Favorites
 							</p>
-							<div className="flex items-center justify-start gap-1 px-1">
+							<div className="flex items-center justify-start gap-1 px-1 cursor-pointer">
 								<FolderIcon className="w-5"></FolderIcon>
 								<p className="cursor-pointer">Projects</p>
 							</div>
-							<div className="flex items-center justify-start gap-1 px-1">
-								<StickyNote className="w-5"></StickyNote>
+							<div className="flex items-center justify-start gap-1 px-1 cursor-pointer">
+								<Book className="w-5"></Book>
 								<p className="cursor-pointer">Blog</p>
+							</div>
+							<div className="flex items-center justify-start gap-1 px-1 cursor-pointer">
+								<AppWindowMac className="w-5"></AppWindowMac>
+								<p className="cursor-pointer">Applications</p>
 							</div>
 						</div>
 					</div>

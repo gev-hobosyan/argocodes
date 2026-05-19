@@ -5,6 +5,7 @@ import { useState } from "react";
 import { WINDOWS } from "./windows";
 import Terminal from "@/components/windows/Terminal";
 import Editor from "@/components/windows/Editor";
+import MenuBar from "@/components/MenuBar";
 
 export default function Home() {
 	const [focusedWindow, setFocusedWindow] = useState("finder");
@@ -24,6 +25,7 @@ export default function Home() {
 
 	return (
 		<div className="relative font-sans min-h-screen w-full overflow-hidden">
+			<MenuBar></MenuBar>
 			{openWindows.map((id) => {
 				const window = WINDOWS.find((window) => window.id === id)!;
 
