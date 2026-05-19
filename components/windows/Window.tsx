@@ -117,7 +117,7 @@ export default function Window({
 	return (
 		<>
 			<div
-				className={`bg-gray-900 absolute rounded-2xl overflow-visible ${className}`}
+				className={`bg-[#212725] absolute rounded-2xl overflow-visible ${className}`}
 				style={{
 					width: size.w,
 					height: size.h,
@@ -133,6 +133,7 @@ export default function Window({
 						<p>{title}</p>
 					</div>
 				</div>
+				{children}
 			</div>
 			<div
 				className="absolute rounded-2xl"

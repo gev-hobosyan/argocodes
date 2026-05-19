@@ -1,6 +1,6 @@
 export const WINDOWS = [
 	{
-		id: 1,
+		id: "finder",
 		title: "Finder",
 		x: 100,
 		y: 90,
@@ -9,7 +9,7 @@ export const WINDOWS = [
 		icon: "/folder.png",
 	},
 	{
-		id: 2,
+		id: "terminal",
 		title: "Terminal",
 		x: 200,
 		y: 100,
@@ -18,7 +18,7 @@ export const WINDOWS = [
 		icon: "/terminal.png",
 	},
 	{
-		id: 3,
+		id: "editor",
 		title: "Editor",
 		x: 500,
 		y: 230,
