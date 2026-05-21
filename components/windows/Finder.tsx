@@ -1,14 +1,17 @@
-import { WINDOWS } from "@/app/windows";
+import { WINDOWS, PROJECTS } from "@/app/data";
 import Window from "./Window";
-import Folder from "../Folder";
+import Folder from "../files/Folder";
 import {
 	AppWindowMac,
 	Book,
+	ChevronLeft,
+	ChevronRight,
 	Clock,
-	FolderArchive,
 	FolderIcon,
-	StickyNote,
 } from "lucide-react";
+import { useMemo, useState } from "react";
+import Link from "../files/Link";
+import MD from "../files/MD";
 
 const window_props = WINDOWS[0];
 
@@ -19,6 +22,14 @@ interface Props {
 }
 
 export default function Finder({ focused, onFocus, onClose }: Props) {
+	const [currentFolder, setCurrentFolder] = useState<string | undefined>(
+		undefined,
+	);
+
+	const folder = useMemo(() => {
+		return PROJECTS.find((project) => project.id === currentFolder);
+	}, [currentFolder]);
+
 	return (
 		<>
 			<Window
@@ -30,7 +41,17 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 				focused={focused}
 				onFocus={onFocus}
 				onClose={onClose}
+				className="relative"
 			>
+				<div className="absolute top-1.5 left-35 flex">
+					<ChevronLeft
+						onClick={() => {
+							if (currentFolder) setCurrentFolder(undefined);
+						}}
+						className={`w-5 ${currentFolder ? "stroke-white cursor-pointer" : "stroke-gray-500"}`}
+					></ChevronLeft>
+					<ChevronRight className="w-5 stroke-gray-500"></ChevronRight>
+				</div>
 				<div className="w-full h-full px-2 py-2 flex">
 					<div className="w-[25%] liquid-glass-dark h-[calc(100%-30px)] rounded-2xl">
 						<div className="px-3 py-2 text-sm flex flex-col gap-1">
@@ -55,8 +76,38 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 							</div>
 						</div>
 					</div>
-					<div className="grid grid-cols-4 grid-rows-5 w-[75%] h-[calc(100%-30px)]">
-						<Folder></Folder>
+					<div className="grid grid-cols-4 grid-rows-5 w-[75%] h-[calc(100%-30px)] mt-3">
+						{currentFolder
+							? folder?.contents.map((element) => {
+									if (element.type === "link") {
+										return (
+											<Link
+												key={element.title}
+												name={element.title!}
+												href={element.href!}
+												icon={element.icon!}
+											></Link>
+										);
+									} else if (element.type === "md") {
+										return (
+											<MD
+												key={element.title}
+												name={element.title}
+												id={element.title}
+											></MD>
+										);
+									}
+
+									return <p key={element.title}>{element.title}</p>;
+								})
+							: PROJECTS.map((project) => (
+									<Folder
+										key={project.id}
+										title={project.title}
+										id={project.id}
+										onClick={() => setCurrentFolder(project.id)}
+									></Folder>
+								))}
 					</div>
 				</div>
 			</Window>

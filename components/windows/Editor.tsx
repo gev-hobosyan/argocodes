@@ -1,4 +1,4 @@
-import { WINDOWS } from "@/app/windows";
+import { WINDOWS } from "@/app/data";
 import Window from "./Window";
 
 const window_props = WINDOWS[2];

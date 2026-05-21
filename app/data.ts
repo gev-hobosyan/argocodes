@@ -1,3 +1,5 @@
+import projects from "./projects.json";
+
 export const WINDOWS = [
 	{
 		id: "finder",
@@ -27,3 +29,5 @@ export const WINDOWS = [
 		icon: "/zed.png",
 	},
 ];
+
+export const PROJECTS = projects;

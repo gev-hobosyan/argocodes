@@ -117,7 +117,7 @@ export default function Window({
 	return (
 		<>
 			<div
-				className={`bg-[#212725] absolute rounded-2xl overflow-visible ${className}`}
+				className={`bg-[#212725] absolute rounded-2xl overflow-visible border-liquid shadow-liquid ${className}`}
 				style={{
 					width: size.w,
 					height: size.h,

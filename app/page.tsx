@@ -2,7 +2,7 @@
 import Dock from "@/components/Dock";
 import Finder from "@/components/windows/Finder";
 import { useState } from "react";
-import { WINDOWS } from "./windows";
+import { WINDOWS } from "./data";
 import Terminal from "@/components/windows/Terminal";
 import Editor from "@/components/windows/Editor";
 import MenuBar from "@/components/MenuBar";
