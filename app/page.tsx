@@ -8,8 +8,8 @@ import Editor from "@/components/windows/Editor";
 import MenuBar from "@/components/MenuBar";
 
 export default function Home() {
-	const [focusedWindow, setFocusedWindow] = useState("finder");
-	const [openWindows, setOpenWindows] = useState(["finder"]);
+	const [focusedWindow, setFocusedWindow] = useState("terminal");
+	const [openWindows, setOpenWindows] = useState(["terminal"]);
 
 	const onClose = (id: string) => {
 		setOpenWindows((prev) => prev.filter((window) => window !== id));

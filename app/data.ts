@@ -31,3 +31,23 @@ export const WINDOWS = [
 ];
 
 export const PROJECTS = projects;
+
+export const COMMANDS = {
+	echo: (...args: string[]) => {
+		return [args.join(" ")];
+	},
+	ls: (...args: string[]) => {
+		if (args[0] === "projects") {
+			return PROJECTS.map((project) => `⎬ ${project.id}`)!;
+		}
+
+		return [];
+	},
+	help: (...args: string[]) => {
+		return [
+			"   help - see all commands",
+			"   ls [directory] - see contents of the directory",
+			"   echo [message] - print the message in terminal",
+		];
+	},
+};
