@@ -20,7 +20,7 @@ export default function Terminal({ focused, onFocus, onClose }: Props) {
 	const [command, setCommand] = useState("");
 	const [scrollIndex, setScrollIndex] = useState<number>(-1);
 
-	const ref = useRef<HTMLDivElement>(null);
+	const ref = useRef<HTMLInputElement>(null);
 
 	const runCommand = useCallback(() => {
 		if (command) {
@@ -36,6 +36,10 @@ export default function Terminal({ focused, onFocus, onClose }: Props) {
 				const res = commandToRun(...commandStruct);
 
 				setHistory((prev) => {
+					if (res[0] === ":clear:") {
+						return [];
+					}
+
 					const newRecord: TerminalCommand = {
 						command: command,
 						result: res,
@@ -87,6 +91,11 @@ export default function Terminal({ focused, onFocus, onClose }: Props) {
 				<div
 					className={`w-full h-full bg-black rounded-b-2xl border-liquid shadow-liquid px-2 py-1 ${vt.className}`}
 					style={{ overflow: "scroll" }}
+					onClick={() => {
+						if (ref !== null) {
+							ref.current?.focus();
+						}
+					}}
 				>
 					{history.map((c, index) => (
 						<div key={index} className="font-bold text-lg">
@@ -106,6 +115,7 @@ export default function Terminal({ focused, onFocus, onClose }: Props) {
 						</p>
 						<input
 							value={command}
+							ref={ref}
 							onChange={(e) => setCommand(e.target.value)}
 							onKeyDown={(e) => {
 								if (e.key === "Enter") runCommand();

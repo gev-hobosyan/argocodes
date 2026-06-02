@@ -1,4 +1,6 @@
-import projects from "./projects.json";
+import AboutMe from "@/components/files/AboutMe";
+import Argo from "@/projects/Argo";
+import Glione from "@/projects/Glione";
 
 export const WINDOWS = [
 	{
@@ -22,15 +24,26 @@ export const WINDOWS = [
 	{
 		id: "editor",
 		title: "Editor",
-		x: 500,
-		y: 230,
-		height: 400,
-		width: 1000,
+		x: 200,
+		y: 130,
+		height: 600,
+		width: 700,
 		icon: "/zed.png",
 	},
 ];
 
-export const PROJECTS = projects;
+export const PROJECTS = [
+	{
+		id: "glione",
+		title: "Glione",
+		component: Glione,
+	},
+	{
+		id: "argo.sh",
+		title: "Argo.sh",
+		component: Argo,
+	},
+];
 
 export const COMMANDS = {
 	echo: (...args: string[]) => {
@@ -41,13 +54,25 @@ export const COMMANDS = {
 			return PROJECTS.map((project) => `⎬ ${project.id}`)!;
 		}
 
-		return [];
+		if (args.length !== 0) {
+			return [`ls: ${args[0]}: No such file or directory`];
+		}
+
+		return ["Please provide the directory name"];
 	},
 	help: (...args: string[]) => {
 		return [
-			"   help - see all commands",
-			"   ls [directory] - see contents of the directory",
-			"   echo [message] - print the message in terminal",
+			"help - see all commands",
+			"ls [directory] - see contents of the directory",
+			"echo [message] - print the message in terminal",
+			"clear - clear command history",
 		];
 	},
+	clear: (...args: string[]) => {
+		return [":clear:"];
+	},
+};
+
+export const FILES = {
+	aboutme: AboutMe,
 };

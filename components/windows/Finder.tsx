@@ -1,6 +1,6 @@
 import { WINDOWS, PROJECTS } from "@/app/data";
 import Window from "./Window";
-import Folder from "../files/Folder";
+import Folder from "../files_types/Folder";
 import {
 	AppWindowMac,
 	Book,
@@ -10,8 +10,8 @@ import {
 	FolderIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import Link from "../files/Link";
-import MD from "../files/MD";
+import Link from "../files_types/Link";
+import MD from "../files_types/MD";
 
 const window_props = WINDOWS[0];
 
@@ -29,6 +29,10 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 	const folder = useMemo(() => {
 		return PROJECTS.find((project) => project.id === currentFolder);
 	}, [currentFolder]);
+
+	const Component = useMemo(() => {
+		if (folder) return folder.component;
+	}, [folder]);
 
 	return (
 		<>
@@ -77,37 +81,18 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 						</div>
 					</div>
 					<div className="grid grid-cols-4 grid-rows-5 w-[75%] h-[calc(100%-30px)] mt-3">
-						{currentFolder
-							? folder?.contents.map((element) => {
-									if (element.type === "link") {
-										return (
-											<Link
-												key={element.title}
-												name={element.title!}
-												href={element.href!}
-												icon={element.icon!}
-											></Link>
-										);
-									} else if (element.type === "md") {
-										return (
-											<MD
-												key={element.title}
-												name={element.title}
-												id={element.title}
-											></MD>
-										);
-									}
-
-									return <p key={element.title}>{element.title}</p>;
-								})
-							: PROJECTS.map((project) => (
-									<Folder
-										key={project.id}
-										title={project.title}
-										id={project.id}
-										onClick={() => setCurrentFolder(project.id)}
-									></Folder>
-								))}
+						{currentFolder && Component ? (
+							<Component />
+						) : (
+							PROJECTS.map((project) => (
+								<Folder
+									key={project.id}
+									title={project.title}
+									id={project.id}
+									onClick={() => setCurrentFolder(project.id)}
+								></Folder>
+							))
+						)}
 					</div>
 				</div>
 			</Window>

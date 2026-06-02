@@ -8,6 +8,7 @@
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+	--color-dark: #141414;
 	--color-liquid: hsl(0, 0%, 100%, 0.4);
 	--shadow-liquid: inset 0 0 2px hsl(0, 0%, 100%, 0.3);
 

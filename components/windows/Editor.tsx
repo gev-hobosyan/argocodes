@@ -1,4 +1,4 @@
-import { WINDOWS } from "@/app/data";
+import { FILES, WINDOWS } from "@/app/data";
 import Window from "./Window";
 
 const window_props = WINDOWS[2];
@@ -7,9 +7,12 @@ interface Props {
 	focused: boolean;
 	onFocus: () => void;
 	onClose: () => void;
+	fileId: string;
 }
 
-export default function Editor({ focused, onFocus, onClose }: Props) {
+export default function Editor({ focused, onFocus, onClose, fileId }: Props) {
+	const Component = FILES[fileId as "aboutme"];
+
 	return (
 		<>
 			<Window
@@ -22,7 +25,7 @@ export default function Editor({ focused, onFocus, onClose }: Props) {
 				onFocus={onFocus}
 				onClose={onClose}
 			>
-				<></>
+				<Component />
 			</Window>
 		</>
 	);
