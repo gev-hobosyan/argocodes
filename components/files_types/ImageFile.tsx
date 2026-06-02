@@ -1,32 +1,28 @@
 import useWindowsContext from "@/context/WindowsContext";
 import Image from "next/image";
+import { useState } from "react";
 
 interface Props {
-	name: string;
+	filename: string;
+	src: string;
 	id: string;
 }
 
-export default function MD({ name, id }: Props) {
-	const openFile = useWindowsContext()?.openFile;
-
+export default function ImageFile({ src, id, filename }: Props) {
 	return (
 		<>
 			<div
 				className="flex flex-col items-center gap-0 cursor-pointer"
-				onClick={() => {
-					if (openFile !== undefined) {
-						openFile(id);
-					}
-				}}
+				onClick={() => {}}
 			>
 				<Image
 					loading="eager"
-					src={"/markdown.png"}
+					src={src}
 					alt={"folder"}
-					width={65}
-					height={65}
+					width={100}
+					height={200}
 				></Image>
-				<p className="text-sm">{name}</p>
+				<p className="text-sm">{filename}</p>
 			</div>
 		</>
 	);

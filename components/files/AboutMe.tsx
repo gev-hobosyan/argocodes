@@ -2,7 +2,7 @@ import useWindowsContext from "@/context/WindowsContext";
 import { X } from "lucide-react";
 
 export default function AboutMe() {
-	const openWindows = useWindowsContext();
+	const openWindows = useWindowsContext()?.openWindow;
 
 	return (
 		<div className="h-full w-full rounded-b-2xl">
@@ -43,7 +43,7 @@ export default function AboutMe() {
 					<span
 						className="text-purple-200 underline cursor-pointer"
 						onClick={() => {
-							if (openWindows !== null) {
+							if (openWindows !== undefined) {
 								openWindows("finder");
 							}
 						}}

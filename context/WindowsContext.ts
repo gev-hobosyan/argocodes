@@ -1,6 +1,12 @@
 import { createContext, useContext } from "react";
 
-export const WindowsContext = createContext<((id: string) => void) | null>(
+interface WindowsContextInterface {
+	openWindow: (id: string) => void;
+	openFile: (id: string) => void;
+	openImage: (id: string) => void;
+}
+
+export const WindowsContext = createContext<WindowsContextInterface | null>(
 	null,
 );
 

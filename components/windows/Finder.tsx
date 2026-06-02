@@ -10,8 +10,6 @@ import {
 	FolderIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import Link from "../files_types/Link";
-import MD from "../files_types/MD";
 
 const window_props = WINDOWS[0];
 
@@ -61,7 +59,7 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 						<div className="px-3 py-2 text-sm flex flex-col gap-1">
 							<div className="flex items-center justify-start gap-1 px-1 cursor-pointer">
 								<Clock className="w-5"></Clock>
-								<p className="cursor-pointer">Recents</p>
+								<p className="cursor-pointer">Recent</p>
 							</div>
 							<p className="text-xs text-gray-500 font-bold cursor-default">
 								Favorites
@@ -80,7 +78,7 @@ export default function Finder({ focused, onFocus, onClose }: Props) {
 							</div>
 						</div>
 					</div>
-					<div className="grid grid-cols-4 grid-rows-5 w-[75%] h-[calc(100%-30px)] mt-3">
+					<div className="grid grid-cols-3 grid-rows-5 gap-y-30 w-[75%] h-[calc(100%-30px)] mt-3">
 						{currentFolder && Component ? (
 							<Component />
 						) : (

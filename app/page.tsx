@@ -1,7 +1,7 @@
 "use client";
 import Dock from "@/components/Dock";
 import Finder from "@/components/windows/Finder";
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { WINDOWS } from "./data";
 import Terminal from "@/components/windows/Terminal";
 import Editor from "@/components/windows/Editor";
@@ -9,9 +9,10 @@ import MenuBar from "@/components/MenuBar";
 import { WindowsContext } from "@/context/WindowsContext";
 
 export default function Home() {
-	const [focusedWindow, setFocusedWindow] = useState("finder");
-	const [openWindows, setOpenWindows] = useState(["finder"]);
-	const [editorFile, setEditorFile] = useState("aboutme");
+	const [focusedWindow, setFocusedWindow] = useState("editor");
+	const [openWindows, setOpenWindows] = useState(["editor"]);
+	const [editorFile, setEditorFile] = useState("glione");
+	const [imagePreview, setImagePreview] = useState("/glione/glione-1.png");
 
 	const onClose = (id: string) => {
 		setOpenWindows((prev) => prev.filter((window) => window !== id));
@@ -26,13 +27,19 @@ export default function Home() {
 	};
 
 	const openFile = (fileId: string) => {
+		openWindow("editor");
 		setEditorFile(fileId);
+	};
+
+	const openImage = (imagePath: string) => {
+		openWindow("preview");
+		setImagePreview(imagePath);
 	};
 
 	return (
 		<div className="relative font-sans min-h-screen w-full overflow-hidden">
 			<MenuBar></MenuBar>
-			<WindowsContext.Provider value={openWindow}>
+			<WindowsContext.Provider value={{ openWindow, openFile, openImage }}>
 				{openWindows.map((id) => {
 					const window = WINDOWS.find((window) => window.id === id)!;
 

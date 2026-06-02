@@ -1,6 +1,8 @@
 import AboutMe from "@/components/files/AboutMe";
+import GlioneMD from "@/components/files/GlioneMD";
 import Argo from "@/projects/Argo";
 import Glione from "@/projects/Glione";
+import { title } from "process";
 
 export const WINDOWS = [
 	{
@@ -29,6 +31,15 @@ export const WINDOWS = [
 		height: 600,
 		width: 700,
 		icon: "/zed.png",
+	},
+	{
+		id: "preview",
+		title: "Preview",
+		x: 300,
+		y: 100,
+		height: 600,
+		width: 700,
+		icon: "/preview.png",
 	},
 ];
 
@@ -75,4 +86,5 @@ export const COMMANDS = {
 
 export const FILES = {
 	aboutme: AboutMe,
+	glione: GlioneMD,
 };
